@@ -14,16 +14,23 @@
 	// 	`is_admin` VARCHAR(50) NOT NULL DEFAULT 'no',
 	// 	`created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	// )";
-	$query = "CREATE TABLE  `movies` (
+
+	// $query = "CREATE TABLE  `movies` (
+	// 	id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	// 	`title` VARCHAR(255) NOT NULL,
+	// 	`genre` VARCHAR(255) NOT NULL,
+	// 	`cover` VARCHAR(30) NULL,
+	// 	`description` VARCHAR(30) NOT NULL,
+	// 	`created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+	// )";
+
+	$query = "CREATE TABLE  `genre` (
 		id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 		`title` VARCHAR(255) NOT NULL,
-		`genre` VARCHAR(255) NOT NULL,
-		`cover` VARCHAR(30) NULL,
-		`description` VARCHAR(30) NOT NULL,
 		`created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	)";
 
-	echo ($dbConnection->query($query)) ? "Db tbale creation successful" : "Error creating table". $dbConnection->error;
+	echo ($dbConnection->query($query)) ? "Db table creation successful" : "Error creating table". $dbConnection->error;
 
 	$dbConnection->close();
 ?>

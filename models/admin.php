@@ -11,7 +11,7 @@
 		}
 
 		public function getAllAdmin(){
-			$query = "SELECT * FROM `genre`";
+			$query = "SELECT `admin.id`, * FROM `admin` LEFT JOIN `users` ON  `admin.user_id` = `users.id`";
 			if ($this->id && $this->id !== "") $query .= "WHERE `id` = {$this->id}";
 
 			$result = $this->dbConnection->query($query);
