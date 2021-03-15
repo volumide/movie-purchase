@@ -9,13 +9,16 @@
 
 	if ($result->num_rows === 1){
 		$_SESSION['online'] = true;
+		?>
+		<!-- closes php tag and opens script tag for local storage -->
+			<script> 
+				localStorage.setItem('online_status', true) 
+				localStorage.setItem('status', result['is_admin']) 
+			</script>
+		<!-- opens php tag and closed script tag  -->
+		<?php
 		header("Location: index.php");
-		
-		// closes php tag for localstorage storage and open on the other end 
-		?>	<script> localStorage.setItem('online_status', true) </script> <?php
-		echo $rows;	
 	} 
-	echo ($dbConnection->query($query)) ? "Registeration successful" : "Error $dbConnection->error" ;
 
 	$dbConnection->close()
 ?>
