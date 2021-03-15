@@ -1,6 +1,7 @@
 <?php
 	require_once '../connections/connection.php';
 	$dbConnection = (new Conn())->connect();
+	
 	$email = "";
 	$password = "";
 

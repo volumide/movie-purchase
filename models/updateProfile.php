@@ -15,6 +15,6 @@
 		country = $country
 	  	WHERE id = `$id` LIMIT 1";
 
-	echo ($dbConnection->query($query)) ? "Record Update successfully": "Not result found";
+	echo ($dbConnection->query($query)) ? "Record Updates successfully": "No result found";
 	$dbConnection->close();
 ?>

@@ -10,7 +10,7 @@
 		}
 
 		public function productQUery(){
-			$query = "SELECT * FROM `users`";
+			$query = "SELECT * FROM `movies`";
 			if ($this->id && $this->id !== "") $query .= "WHERE `id` = {$this->id}";
 
 			$result = $this->dbConnection->query($query);
