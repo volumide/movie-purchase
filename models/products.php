@@ -18,6 +18,12 @@
 			else $this->return = "Not result found";
 			return $this->return;
 		}
+
+		public function deleteProduct(){
+			$query = "DELETE FROM `movies` WHERE id = `$this->id`";
+			// return result based on query
+			return ($this->dbConnection->query($query)) ? "Record Updates successfully": "Not result found";
+		}
 	}
 
 ?>
