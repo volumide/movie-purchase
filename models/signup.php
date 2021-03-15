@@ -11,6 +11,7 @@
 	$gender = "";
 	$dateOfBirth = "";
 	$confirmPassword = "";
+	$secretKey = "";
 	$last_id;
 
 	$query = "INSERT INTO `users` 
@@ -18,7 +19,7 @@
 		($name, $email, $password, $phone, $gender, $dateOfBirth, $isAdmin)";
 	($dbConnection->query($query)) ? $last_id = $dbConnection->insert_id : "Error $dbConnection->error" ;
 	if ($isAdmin === "yes") {
-		$query = "INSERT INTO `admin` (`user_id`) VALUES ($last_id)";
+		$query = "INSERT INTO `admin` (`user_id`, `key`) VALUES ($last_id, $secretKey)";
 		echo ($dbConnection->query($query)) ? "You are now an admin" : "Error $dbConnection->error";
 	}
 	else echo "registeration successfull";
