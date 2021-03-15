@@ -13,6 +13,7 @@
 	$confirmPassword = "";
 	$secretKey = "";
 	$last_id;
+	$message;
 
 	$query = "INSERT INTO `users` 
 		(`fullname`, `email`, `password`, `phone`, `gender`, `dob`, `is_admin`) VALUES 
@@ -20,9 +21,9 @@
 	($dbConnection->query($query)) ? $last_id = $dbConnection->insert_id : "Error $dbConnection->error" ;
 	if ($isAdmin === "yes") {
 		$query = "INSERT INTO `admin` (`user_id`, `key`) VALUES ($last_id, $secretKey)";
-		echo ($dbConnection->query($query)) ? "You are now an admin" : "Error $dbConnection->error";
+		$message = ($dbConnection->query($query)) ? "You are now an admin" : "Error $dbConnection->error";
 	}
-	else echo "registeration successfull";
+	else $message = "registeration successfull";
 
 	$dbConnection->close()
 ?>

@@ -7,9 +7,10 @@
 	$cover = "";
 	$price = "";
 	$description = "";
+	$message;
 	
 	if (!isset($_GET['id'])) {
-		echo "unable to perfom the operation";
+		$message = "unable to perfom the operation";
 		return;
 	}
 
@@ -22,5 +23,5 @@
 		`description` = $description
 	WHERE id = `$this->id`";
 	// return result by id based on query
-	return ($this->dbConnection->query($query)) ? "Record Updated successfully": "No result found";
+	$message = ($this->dbConnection->query($query)) ? "Record Updated successfully": "No result found";
 ?>

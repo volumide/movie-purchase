@@ -28,13 +28,12 @@
 				$query = "UPDATE `users` SET `is_admin` = 'no'";
 				return $this->dbConnection->query($query) ? "Record Updates successfully": "Not result found";
 			} 
-			else return "Not result found";
+			return "Not result found";
 		}
 
 		// function to make a normal user an admin
 		public function UpdateAdmin(){
 			$query = "UPDATE `genre` SET title = `$this->genreTitle` WHERE id = `$this->id`";
-			// return result by id based on query
 			return ($this->dbConnection->query($query)) ? "Record Updated successfully": "No result found";
 		}
 	}

@@ -6,6 +6,7 @@
 	$phone = "";
 	$country = "";
 	$id;
+	$message;
 	
 	if (isset($_GET['id'])) $id = $_GET['id'];
 	$query = "UPDATE `users` SET 
@@ -15,6 +16,6 @@
 		country = $country
 	  	WHERE id = `$id` LIMIT 1";
 
-	echo ($dbConnection->query($query)) ? "Record Updates successfully": "No result found";
+	$message = ($dbConnection->query($query)) ? "Record Updates successfully": "No result found";
 	$dbConnection->close();
 ?>
