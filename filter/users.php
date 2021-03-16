@@ -21,6 +21,6 @@
 		foreach ($ageFilter as$user) {
 			echo '$user["fullname"]';
 		}
-		return
+		return;
 	}
 ?>
