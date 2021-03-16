@@ -1,6 +1,6 @@
 <?php
 	require_once '../connections/connection.php';
-	require_once './products.php';
+	require_once './productsController.php';
 	$dbConnection = (new Conn())->connect();
 	if (!isset($_GET['id'])) {
 		$message = "unable to perfom the operation";
