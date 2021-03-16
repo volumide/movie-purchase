@@ -9,7 +9,7 @@
 </head>
 
 <body>
-	<form action="./models/signup.php" method="POST">
+	<form action="./auth/signup.php" method="POST">
 		<div>
 			<label for="name">Name</label>
 			<input type="text" name="name" id="name">
@@ -32,7 +32,8 @@
 		</div>
 		<div>
 			<label for="dob">Date Of Birth</label>
-			<input type="text" name="dob" id="dob">
+			<input type="date" name="dob" id="dob">
+			<!-- <input type="text" name="dob" id="dob"> -->
 		</div>
 		<div>
 			<label for="password">Password</label>

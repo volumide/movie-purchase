@@ -31,6 +31,12 @@
 	// 	`created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	// )";
 
+	$query = "CREATE TABLE  `admins` (
+		id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		`user_id` VARCHAR(255) NOT NULL,
+		`created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+	)";
+
 	echo ($dbConnection->query($query)) ? "Db table creation successful" : "Error creating table". $dbConnection->error;
 
 	$dbConnection->close();

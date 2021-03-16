@@ -2,7 +2,7 @@
 	// error_reporting(0);
 	require '../connections/connection.php';
 	$dbConnection = (new Conn())->connect();
-
+	
 	$name = $_POST['name'];
 	$email = $_POST['email'];
 	$password = $_POST['password'];
