@@ -2,7 +2,7 @@
 	class Products{
 		protected $dbConnection ;
 		private $id;
-		public $results = [];
+		private $results = [];
 
 		public function __construct($dbConnection, $id = null) {
 			$this->dbConnection = $dbConnection;
@@ -15,9 +15,8 @@
 
 			$result = $this->dbConnection->query($query);
 			if ($result->num_rows > 0) while ($rows = $result->fetch_assoc()) array_push($this->results, $rows);	
-			else $this->return = "Not result found";
-			
-			return $this->return;
+			else $this->results = "Not result found";
+			return $this->results;
 		}
 
 		public function deleteProduct(){

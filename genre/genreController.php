@@ -1,5 +1,5 @@
 <?php  
-	class Products{
+	class Genre{
 		private $dbConnection ;
 		private $id;
 		private $results = [];

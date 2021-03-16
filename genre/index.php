@@ -3,7 +3,7 @@
 	require_once './genreController.php';
 
 	$dbConnection = (new Conn())->connect();
-	$genre = new Products($dbConnection);
+	$genre = new Genre($dbConnection);
 	$allgenre =  $genre->getGenre();
 	if (is_array($allgenre)) 
 		foreach ($allgenre as $singleGenre)
