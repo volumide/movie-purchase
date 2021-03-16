@@ -2,11 +2,13 @@
 	require_once '../connections/connection.php';
 	error_reporting(0);
 	$dbConnection = (new Conn())->connect();
-	$title = $_POST['title'];
-	$message;
-	$query = "INSERT INTO `genre` (`title`) VALUES ($title)";
-	$message = ($dbConnection->query($query)) ? "genre created successfully" : "Error $dbConnection->error";
-	echo $message;
+	if (isset($_POST['title'])) {
+		$title = $_POST['title'];
+		$message;
+		$query = "INSERT INTO `genre` (`title`) VALUES ('$title')";
+		$message = ($dbConnection->query($query)) ? "genre created successfully" : "Error $dbConnection->error";
+		echo $message;	
+	}
 ?>
 
 <form action="" method="POST">
