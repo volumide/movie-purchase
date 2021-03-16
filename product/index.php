@@ -27,6 +27,7 @@
 						>
 						<input type="submit" value="Delete" >
 					</form>
+					<a href="update.php?id=<?php echo $product['id'] ?>">Update Product</a>
 				</li>
 			<?php
 		}
