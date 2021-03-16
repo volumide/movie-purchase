@@ -11,6 +11,7 @@
 	}
 
 	$allProduct = $products->productQUery();
+
 	if (is_array($allProduct)) {
 		?>
 			<ul>
