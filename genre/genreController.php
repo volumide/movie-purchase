@@ -12,7 +12,7 @@
 
 		public function getGenre(){
 			$query = "SELECT * FROM `genre`";
-			if ($this->id && $this->id !== "") $query .= "WHERE `id` = {$this->id}";
+			if ($this->id && $this->id !== "") $query .= "WHERE `id` = '{$this->id}'";
 
 			$result = $this->dbConnection->query($query);
 			
