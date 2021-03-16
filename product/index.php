@@ -1,13 +1,35 @@
 <?php
 	require_once '../connections/connection.php';
-	require_once './products.php';
+	require_once './productsController.php';
 
 	$dbConnection = (new Conn())->connect();
 	$products = new Products($dbConnection);
 
+	if (isset($_POST['delete'])) {
+		$delete = $_POST['delete'];
+		echo $products->deleteProduct($delete);
+	}
+
 	$allProduct = $products->productQUery();
-	if (is_array($allProduct)) 
-		foreach ($allProduct as $product)
-			echo $product["title"]. " => ". $product["id"] . "<br>";
-	else echo $allgenre;
+	if (is_array($allProduct)) {
+		?>
+			<ul>
+		<?php
+		foreach ($allProduct as $product){
+			?>
+				<li>
+					<p> <?php echo $product['title'] ?> </p>
+					<p> <?php echo $product['description'] ?> </p>
+					<form action="" method="post">
+						<input type="text" name="delete"  
+							value="<?php echo $product['id'] ?>" 
+							style="display: none;"
+						>
+						<input type="submit" value="Delete" >
+					</form>
+				</li>
+			<?php
+		}
+	}
+	else echo "<p> $allgenre </p>";
 ?>

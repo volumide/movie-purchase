@@ -19,10 +19,10 @@
 			return $this->results;
 		}
 
-		public function deleteProduct(){
-			$query = "DELETE FROM `movies` WHERE id = `$this->id`";
+		public function deleteProduct($id){
+			$query = "DELETE FROM `movies` WHERE id = '$id'";
 			// return result based on query
-			return ($this->dbConnection->query($query)) ? "Record Updates successfully": "Not result found";
+			return ($this->dbConnection->query($query)) ? "Record Deleted successfully": "Not result found ".$this->dbConnection->error;
 		}
 	}
 
