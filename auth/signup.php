@@ -20,10 +20,19 @@
 		echo"All fields are required";
 		return;
 	}
+	// check exisitng email
+	$sql = "SELECT email from `users` WHERE email = '$email'";
+	if($dbConnection->query(($sql))->num_rows > 0){
+		echo "email already in use by another user";
+		return;
+	}
+	// confirm password 
 	if ($password !== $confirmPassword) {
 		echo"Password not match";
 		return;
 	}
+	// encrypt password;
+	$password = password_hash($password, PASSWORD_BCRYPT);
 	// echo "$name $email $country $phone $gender $dateOfBirth $secretKey $password $confirmPassword";
 	$query = "INSERT INTO `users` (`fullname`, `email`, `password`, `phone`, `gender`, `dob`, `is_admin`,`country`) VALUES ('$name', '$email', '$password', '$phone', '$gender', '$dateOfBirth', '$isAdmin', '$country')";
 	if ($dbConnection->query($query)){

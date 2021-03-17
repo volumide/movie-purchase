@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	require_once "./connections/connection.php";
 	require_once "./product/productsController.php";
 	
@@ -7,12 +8,12 @@
 	
 	$productId = $_GET['id'];
 	$currentDate = strval(date('Y-m-d'));
-	$online = "<script>
-		if(localStorage.getItem('online_status'))document.write(localStorage.getItem('online_status'))
-		else document.write('')
-	</script>";
-	$status = $online;
-	
+	$session_name = "";
+	$status = "";
+	if ($_SESSION){
+		$session_name = $_SESSION['name'];
+		$status = $_SESSION['status'];
+	}
 
 	$products = (new Products($dbConnection, $_GET['id']))->productQUery();
 
@@ -27,35 +28,18 @@
 			</form>
 		<?php
 	}
-	// echo $online;
-	// echo $status;
 
-	if ($status == false) {
-		echo 'wroking';
-	}else{
-		echo 'not working';
+	if (isset($_POST['purchase'])) {
+		if(!$session_name){
+			echo "Sign up to purchase this app";
+			return;
+		}
+		
+		if ($status === 'yes') {
+			echo "In eligigible to purchase this item";
+			return;
+		}
+		$query = "INSERT INTO `purchases` (`user_id`, `product_id`, `purchase_date`) VALUES ('1', '$productId', '$currentDate' )";
+		$message = ($dbConnection->query($query)) ? "purchase successfull" : "Error $dbConnection->error";
+		echo $message;
 	}
-	// if ($online) {
-	// 	echo $online . "working";
-	// }else{
-	// 	echo "working";
-	// }
-	// if($online === 'hello') echo "offline";
-	// else{
-		// if (isset($_POST['purchase'])) {
-			// echo $online;
-			// if($online != ''){
-			// 	echo $online;
-			// 	// return;
-			// }
-	
-			
-			// if($online === 'not found'){
-			// 	echo "Not a resgistered user. Register to purchase";
-			// }else{
-			// 	$query = "INSERT INTO `purchases` (`user_id`, `product_id`, `purchase_date`) VALUES ('1', '$productId', '$currentDate' )";
-			// 	$message = ($dbConnection->query($query)) ? "purchase successfull" : "Error $dbConnection->error";
-			// 	echo $message;
-			// }
-		// }
-	// }

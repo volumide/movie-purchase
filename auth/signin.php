@@ -1,26 +1,30 @@
 <?php
+	session_start();
 	require_once '../connections/connection.php';
 	$dbConnection = (new Conn())->connect();
 	
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 
-	$query = "SELECT * FROM `users` WHERE `email` = '$email' and `password` = '$password'";
+	$query = "SELECT * FROM `users` WHERE `email` = '$email' LIMIT 1";
 	$result = $dbConnection->query($query);
 
 	if($result->num_rows > 0){
-		echo "successful";
-		while ($row = $result->fetch_assoc()) {
-			?>
-				<script> 
-					localStorage.setItem('online_status', "true")  
-					localStorage.setItem('is_admin', <?php echo "'". $row['is_admin'] ."'"; ?> )  
-				</script> 
-			<?php
+		$row = $result->fetch_assoc();
+		$verify = password_verify($password, $row['password']);
+		if (!$verify) {
+			echo "Invalid password";
+			return;
 		}
-		// header("Location: ../");
-	} else{ echo "Invalid email or password"; }
-	// 12234
+
+		$_SESSION['id'] = $row['id'];
+		$_SESSION['name'] = $row['fullname'];
+		$_SESSION['status'] = $row['is_admin'];
+		echo "successful";
+		sleep(5);
+		header("Location: ../");
+		exit();
+	} else echo "email not found in our database"; 
 
 	$dbConnection->close()
 ?>
