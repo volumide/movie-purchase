@@ -6,14 +6,28 @@
 	$allUsers= [];
 	$user;
 	$id = "";
+	if (isset($_GET['id'])) $id = $_GET['id'];
 	
+	
+	if (isset($_POST['submit'])) {
+		$name = $_POST['name'];
+		$email = $_POST['email'];
+		$phone = $_POST['phone'];
+		$country = $_POST['country'];
+		
+		$sql = "UPDATE `users` SET 
+			fullname = '$name',
+			email = '$email',
+			phone = '$phone',
+			country = '$country'
+			WHERE id = '$id' LIMIT 1";
+
+		echo ($dbConnection->query($sql)) ? "Record Updates successfully": "No result found";
+	}
+
 	// query all user table for admin and update profile 
 	$query = "SELECT * FROM `users`";
-	if (isset($_GET['id'])) {
-		$id = $_GET['id'];
-		// this queries the database and id is provided
-		$query .= "WHERE `id` = '$id'";
-	}
+	if ($id) $query .= "WHERE `id` = '$id'";
 
 	$result = $dbConnection->query($query);
 	if ($result->num_rows > 0) while ($rows = $result->fetch_assoc()){
@@ -45,7 +59,7 @@
 						<input type="date" name="dob" id="dob" value="<?php echo $rows['dob'] ?>" disabled>
 						<!-- <input type="text" name="dob" id="dob"> -->
 					</div>
-					<button type="submit" id="update" style="display: none;">Update</button>
+					<button type="submit" id="update" name="submit" style="display: none;">Update</button>
 					<button type="button" id="edit">Edit</button>
 					<script>
 						const docs = document.querySelectorAll("input")

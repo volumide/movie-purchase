@@ -1,18 +1,19 @@
 <?php
 	session_start();
 	require_once '../connections/connection.php';
-	$authenticate = getSession($_SESSION['status']);
-	if ($authenticate === 'not eligible'){
+	require_once '../models/isadmin.php';
+
+	if (getSession($_SESSION['status']) === 'eligible'){
 		header("Location: ../");
 		exit();
 	}
-	error_reporting(0);
+	// error_reporting(0);
 	$dbConnection = (new Conn())->connect();
 	if (isset($_POST['title'])) {
 		$title = $_POST['title'];
 		$message;
-		$query = "INSERT INTO `genre` (`title`) VALUES ('$title')";
-		$message = ($dbConnection->query($query)) ? "genre created successfully" : "Error $dbConnection->error";
+		$query = "INSERT INTO `genre` (`name`) VALUES ('$title')";
+		$message = ($dbConnection->query($query)) ? "$title genre created successfully" : "Error $dbConnection->error";
 		echo $message;	
 	}
 ?>

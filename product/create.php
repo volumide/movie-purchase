@@ -2,20 +2,23 @@
 	session_start();
 	// admin create new product
 	require_once '../connections/connection.php';
+	require_once '../genre/genreController.php';
 	require_once '../models/isadmin.php';
 
 	$authenticate = getSession($_SESSION['status']);
-	if ($authenticate === 'not eligible'){
+	if ($authenticate !== 'not eligible'){
 		header("Location: ../");
 		exit();
 	}
-
 	// error_reporting(0);
 	$dbConnection = (new Conn())->connect();
+	$genres = (new Genre($dbConnection))->getGenre();
+
 	if (isset($_POST['submit'])) {
 		$title = $_POST['title'];
 		$genre = $_POST['genre'];
 		$price = $_POST['price'];
+		$cover = '';
 		$description = $_POST['desc'];
 		$dir = 'covers/';
 		$tempName = "";
@@ -38,9 +41,13 @@
 			}
 		}
 
+		if ($_POST['cover']) {
+			$moveImage =  move_uploaded_file($tempName, $dir);
+		}
+
 		$query = "INSERT INTO `movies` (`title`, `genre`, `cover`,`price`, `description`) VALUES ('$title', '$genre', '$cover', '$price', '$description')";
 	
-		if ($dbConnection->query($query) && move_uploaded_file($tempName, $dir))$message = "Movie created successfully";
+		if ($dbConnection->query($query))$message = "Movie created successfully";
 		else $message = "Error $dbConnection->error";
 	
 		echo $message;
@@ -55,7 +62,18 @@
 	</div>
 	<div>
 		<label for="genre">Genre</label>
-		<input type="genre" name="genre" id="genre">
+		<select name="genre" id="genre">
+			<option value="">select genre</option>
+			<?php
+				// get all genre from genre database
+				foreach ($genres as $genre) {
+					?>
+						<option value="<?php echo $genre['id'] ?>"><?php echo $genre['title'] ?></option>
+					<?php
+				}
+			?>
+		</select>
+		<!-- <input type="genre" name="genre" id="genre"> -->
 	</div>
 	<div>
 		<label for="cover">cover</label>

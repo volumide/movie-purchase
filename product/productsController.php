@@ -10,12 +10,17 @@
 		}
 
 		public function productQUery(){
-			$query = "SELECT * FROM `movies`";
-			if ($this->id && $this->id !== "") $query .= "WHERE `id` = '{$this->id}'";
+			$query = "SELECT genre.*, movies.* FROM `movies` LEFT JOIN genre ON  genre.id =  movies.genre_id";
+			// if ($this->id && $this->id !== "") $query .= "WHERE id = '{$this->id}'";
 
-			$result = $this->dbConnection->query($query);
-			if ($result->num_rows > 0) while ($rows = $result->fetch_assoc()) array_push($this->results, $rows);	
-			else $this->results = "Not result found";
+			$result = $this->dbConnection->query($query) or die($this->dbConnection->error);
+			while ($rows = $result->fetch_assoc()) array_push($this->results, $rows);	
+			if ($this->id && $this->id !== "") {
+				foreach ($this->results as $result) 
+					if (intval($result['id']) == intval($this->id)) return $result;
+					else return "no mtach";
+			}
+			// else $this->results = "Not result found";
 			return $this->results;
 		}
 

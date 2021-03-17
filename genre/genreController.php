@@ -24,9 +24,9 @@
 		}
 
 		public function deleteGenre(){
-			$query = "DELETE FROM `genre` WHERE id = `$this->id`";
+			$query = "DELETE FROM `genre` WHERE id = '$this->id'";
 			// return result based on query
-			return ($this->dbConnection->query($query)) ? "Record Updates successfully": "Not result found";
+			return ($this->dbConnection->query($query)) ? "Record deleted successfully": "Not result found";
 		}
 
 		public function updateGenre(){

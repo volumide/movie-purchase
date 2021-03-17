@@ -1,12 +1,11 @@
 <?php
 	session_start();
-
+	echo "<h1>All available Films</h1>";
 	require_once '../connections/connection.php';
 	require_once './productsController.php';
 	require_once '../models/isadmin.php';
 
-	$authenticate = getSession($_SESSION['status']);
-	if ($authenticate === 'not eligible'){
+	if (getSession($_SESSION['status']) !== 'not eligible'){
 		header("Location: ../");
 		exit();
 	}

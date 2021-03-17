@@ -2,23 +2,25 @@
 	session_start();
 	require_once '../connections/connection.php';
 	require_once './productsController.php';
+	require_once '../genre/genreController.php';
 	require_once '../models/isadmin.php';
 
-	$authenticate = getSession($_SESSION['status']);
-	if ($authenticate === 'not eligible'){
+	if (getSession($_SESSION['status']) !== 'not eligible'){
 		header("Location: ../");
 		exit();
 	}
 
-
 	$dbConnection = (new Conn())->connect();
+	$genres = (new Genre($dbConnection))->getGenre();
+
 	if (!isset($_GET['id'])) {
 		$message = "unable to perfom the operation";
 		return;
 	}
 
-	$product;
+	// $product;
 	$id = $_GET['id'];
+	$products = (new Products($dbConnection, $_GET['id']))->productQUery();
 
 	// check if form values are set and ready for query
 	if (isset($_POST['title']) || isset($_POST['genre']) || isset($_POST['cover']) || isset($_POST['desc']) ||isset($_POST['price'])) {
@@ -30,7 +32,7 @@
 		if (intval($price)) {
 			$query = "UPDATE `movies` SET 
 				`title` = '$title',
-				`genre` = '$genre',
+				`genre_id` = '$genre',
 				`cover` = '$cover',
 				`price` = '$price',
 				`description` = '$description'
@@ -48,7 +50,7 @@
 	// get data value from database
 	$products = (new Products($dbConnection, $_GET['id']))->productQUery();
 	if (is_array($products)) {
-		$product = $products[0];
+		$product = $products;
 		?>
 			<!-- form for updating the product -->
 			<form action=""  method="POST">
@@ -58,7 +60,18 @@
 				</div>
 				<div>
 					<label for="genre">Genre</label>
-					<input type="genre" name="genre" id="genre" value="<?php echo trim($product['genre'], " ");?>">
+					<!-- <input type="genre" name="genre" id="genre" value="<?php echo trim($product['genre'], " ");?>" disabled> -->
+					<select name="genre" id="genre">
+						<option value="<?php echo trim($product['genre_id'], " ");?>"><?php echo trim($product['name'], " ");?></option>
+						<?php
+							// get all genre from genre database
+							foreach ($genres as $genre) {
+								?>
+									<option value="<?php echo $genre['id'] ?>"><?php echo $genre['name'] ?></option>
+								<?php
+							}
+						?>
+					</select>
 				</div>
 				<div>
 					<label for="cover">Cover</label>
@@ -71,10 +84,10 @@
 				<div>
 					<label for="desc">Brief description</label>
 					<textarea name="desc" id="desc">
-					<?php echo trim($product['description'], " ");?>
+					<?php echo nl2br($product['description']);?>
 				</textarea>
 				</div>
-				<button type="submit">Update</button>
+				<button type="submit" name="submit">Update</button>
 			</form>
 		<?php
 
