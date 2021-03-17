@@ -3,11 +3,9 @@
 	require_once '../connections/connection.php';
 	require_once './productsController.php';
 	$authenticate = getSession($_SESSION['status']);
-	if ($authenticate === 'not eligible') {
-		echo $authenticate;
-		sleep(5);
+	if ($authenticate === 'not eligible'){
 		header("Location: ../");
-		return;
+		exit();
 	}
 
 

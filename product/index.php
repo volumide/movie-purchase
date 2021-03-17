@@ -6,11 +6,9 @@
 	require_once '../models/isadmin.php';
 
 	$authenticate = getSession($_SESSION['status']);
-	if ($authenticate === 'not eligible') {
-		echo $authenticate;
-		sleep(5);
+	if ($authenticate === 'not eligible'){
 		header("Location: ../");
-		return;
+		exit();
 	}
 
 	$dbConnection = (new Conn())->connect();
