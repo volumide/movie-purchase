@@ -2,11 +2,9 @@
 	session_start();
 	require_once '../connections/connection.php';
 	$authenticate = getSession($_SESSION['status']);
-	if ($authenticate === 'not eligible') {
-		echo $authenticate;
-		sleep(5);
+	if ($authenticate === 'not eligible'){
 		header("Location: ../");
-		return;
+		exit();
 	}
 	error_reporting(0);
 	$dbConnection = (new Conn())->connect();
