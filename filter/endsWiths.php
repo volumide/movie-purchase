@@ -5,7 +5,10 @@
 	require_once '../models/isadmin.php';
 
 	$authenticate = getSession($_SESSION['status']);
-	if ($authenticate === 'not eligible') header("Location: ../");
+	if ($authenticate === 'not eligible'){
+		header("Location: ../");
+		exit();
+	}
 
 	$dbConnection = (new Conn())->connect();
 	$products = (new Products($dbConnection))->productEndWithS();
