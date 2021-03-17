@@ -9,6 +9,7 @@
 	$message;
 	
 	if (isset($_GET['id'])) $id = $_GET['id'];
+	
 	$query = "UPDATE `users` SET 
 		fullname = `$name`,
 		email = `$email`,
