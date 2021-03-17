@@ -38,7 +38,7 @@
 					</div>
 					<div>
 						<label for="dob">Date Of Birth</label>
-						<input type="text" name="dob" id="dob" value="<?php echo $rows['dob'] ?>" disabled>
+						<input type="date" name="dob" id="dob" value="<?php echo $rows['dob'] ?>" disabled>
 						<!-- <input type="text" name="dob" id="dob"> -->
 					</div>
 					<button type="submit" id="update" style="display: none;">Update</button>
@@ -50,7 +50,9 @@
 
 						edit.addEventListener('click', (e)=>{
 							e.preventDefault()
-							docs.forEach(e => e.disabled = false)
+							docs.forEach(e =>{
+								if(e.name !== 'dob' && e.name !== 'gender') e.disabled = false
+							})
 							edit.style.display = 'none'
 							update.style.display = 'block'
 						})
