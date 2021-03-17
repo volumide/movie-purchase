@@ -1,5 +1,5 @@
 <?php
-	session_start();
+	include_once './misc/header.php';
 	require_once "./connections/connection.php";
 	require_once "./product/productsController.php";
 	$dbConnection = ((new Conn))->connect();
@@ -26,4 +26,6 @@
 		<?php
 	}
 	else echo "<p> $allgenre </p>";
+
+	include_once './misc/footer.php';
 ?>

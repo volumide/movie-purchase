@@ -1,5 +1,5 @@
 <?php
-	session_start();
+	include_once './misc/header.php';
 	require_once "./connections/connection.php";
 	require_once "./product/productsController.php";
 	
@@ -34,7 +34,7 @@
 			echo "Sign up to purchase this app";
 			return;
 		}
-		
+
 		if ($status === 'yes') {
 			echo "In eligigible to purchase this item";
 			return;
@@ -43,3 +43,6 @@
 		$message = ($dbConnection->query($query)) ? "purchase successfull" : "Error $dbConnection->error";
 		echo $message;
 	}
+
+	include_once './misc/header.php';
+?>
