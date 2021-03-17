@@ -10,23 +10,28 @@
 		echo "unable to perfom the operation";
 		return;
 	}
+	$id = $_GET['id'];
+	$verify = "";
+	
 	$query = "SELECT `password` FROM `users` WHERE id = $id LIMIT 1";
 	$result = $dbConnection->query($query);
+	
+	if($result->num_rows > 0){
+		$row = $result->fetch_assoc();
+		$verify = password_verify($password, $row['password']);
+	}
 
-	if($result->num_rows < 1) throw new Exception("Error Processing Request", 1);
-	$password = $result;
-
-	if ($password !== $oldPassword){
+	if (!$verify){
 		$message = "Your password does not match";
 		return;
 	}
 
-	$id = $_GET['id'];
 	if ($newPassword !== $confirmPassword) {
 		$message = "Password does not match";
 		return;
 	}
 
-	$query = "UPDATE `movies` SET `password` = `$newPassword` WHERE id = `$id`";
+	$newPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+	$query = "UPDATE `movies` SET `password` =  `$newPassword` WHERE id = `$id`";
 	$message =  ($this->dbConnection->query($query)) ? "Record Updated successfully": "No result found";
 ?>
