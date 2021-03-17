@@ -1,5 +1,13 @@
 <?php
+	session_start();
 	require_once '../connections/connection.php';
+	$authenticate = getSession($_SESSION['status']);
+	if ($authenticate === 'not eligible') {
+		echo $authenticate;
+		sleep(5);
+		header("Location: ../");
+		return;
+	}
 	error_reporting(0);
 	$dbConnection = (new Conn())->connect();
 	if (isset($_POST['title'])) {

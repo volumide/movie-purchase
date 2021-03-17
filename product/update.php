@@ -1,6 +1,16 @@
 <?php
+	session_start();
 	require_once '../connections/connection.php';
 	require_once './productsController.php';
+	$authenticate = getSession($_SESSION['status']);
+	if ($authenticate === 'not eligible') {
+		echo $authenticate;
+		sleep(5);
+		header("Location: ../");
+		return;
+	}
+
+
 	$dbConnection = (new Conn())->connect();
 	if (!isset($_GET['id'])) {
 		$message = "unable to perfom the operation";

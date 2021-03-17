@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	require_once "./connections/connection.php";
 	require_once "./product/productsController.php";
 	$dbConnection = ((new Conn))->connect();

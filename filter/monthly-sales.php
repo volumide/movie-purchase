@@ -1,7 +1,13 @@
 <?php
+	session_start();
 	require_once '../connections/connection.php';
-	$dbConnection = (new Conn())->connect();
+	require_once '../models/isadmin.php';
 
+	$authenticate = getSession($_SESSION['status']);
+	if ($authenticate === 'not eligible') header("Location: ../");
+
+	$dbConnection = (new Conn())->connect();
+	$authenticate = getSession($_SESSION['status']);
 	$responses = [];
 	$dateCategory = [];
 	// $finalResult = [];

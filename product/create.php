@@ -1,21 +1,52 @@
 <?php
-// admin create new product
+	session_start();
+	// admin create new product
 	require_once '../connections/connection.php';
-	error_reporting(0);
+	require_once '../models/isadmin.php';
+
+	$authenticate = getSession($_SESSION['status']);
+	if ($authenticate === 'not eligible') {
+		echo $authenticate;
+		sleep(5);
+		header("Location: ../");
+		return;
+	}
+
+	// error_reporting(0);
 	$dbConnection = (new Conn())->connect();
-	$title = $_POST['title'];
-	$genre = $_POST['genre'];
-	$cover = $_POST['cover'];
-	$price = $_POST['price'];
-	$description = $_POST['desc'];
-	$message;
+	if (isset($_POST['submit'])) {
+		$title = $_POST['title'];
+		$genre = $_POST['genre'];
+		$price = $_POST['price'];
+		$description = $_POST['desc'];
+		$dir = 'covers/';
+		$tempName = "";
+		$error = [];
+		$message;
 
-	$query = "INSERT INTO `movies` (`title`, `genre`, `cover`,`price`, `description`) VALUES ('$title', '$genre', '$cover', '$price', '$description')";
+		if ($_POST['cover']){
+			$cover = $_FILES['cover']['name'];
+			$tempName = $_FILES['cover']['tmp_name'];
+			$fileType = strtolower(pathinfo(basename($dir .$cover),PATHINFO_EXTENSION));
+			if (!getimagesize($tempName)) array_push($error, "file is not an image type"); 
+			if (!$fileType != "jpg" || !$fileType != "jpeg" || !$fileType != "png") array_push($error, "Only JPEG PNG and JPG file are accepted" );
+			if (($_FILES['cover']['size']) > 20000) array_push($error, "file size is too large");
+		}
+		
+		if (count($error) > 0) {
+			foreach ($error as $value) {
+				echo $value;
+				return;
+			}
+		}
 
-	if ($dbConnection->query($query)) $message = "Movie created successfully";
-	else $message = "Error $dbConnection->error";
-
-	echo $message;
+		$query = "INSERT INTO `movies` (`title`, `genre`, `cover`,`price`, `description`) VALUES ('$title', '$genre', '$cover', '$price', '$description')";
+	
+		if ($dbConnection->query($query) && move_uploaded_file($tempName, $dir))$message = "Movie created successfully";
+		else $message = "Error $dbConnection->error";
+	
+		echo $message;
+	}
 	$dbConnection->close()
 ?>
 
@@ -40,5 +71,5 @@
 		<label for="desc">Brief description</label>
 		<textarea name="desc" id="desc"></textarea>
 	</div>
-	<button type="submit">Add movie</button>
+	<button type="submit" name="submit">Add movie</button>
 </form>
