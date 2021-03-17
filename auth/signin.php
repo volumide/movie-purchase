@@ -10,14 +10,17 @@
 
 	if($result->num_rows > 0){
 		echo "successful";
-		?>
-			<script> 
-				localStorage.setItem('online_status', true)  
-				localStorage.setItem('status', result['is_admin'])  
-			</script> 
-		<?php
-		header("Location: index.php");
-	} else echo "Invalid email or password";
+		while ($row = $result->fetch_assoc()) {
+			?>
+				<script> 
+					localStorage.setItem('online_status', "true")  
+					localStorage.setItem('is_admin', <?php echo "'". $row['is_admin'] ."'"; ?> )  
+				</script> 
+			<?php
+		}
+		// header("Location: ../");
+	} else{ echo "Invalid email or password"; }
+	// 12234
 
 	$dbConnection->close()
 ?>

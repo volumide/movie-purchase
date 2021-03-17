@@ -1,11 +1,10 @@
+
+<script >
+	localStorage.removeItem('online_status') 
+	localStorage.removeItem('is_admin')
+	
+</script>  
+
 <?php 
-	session_start();
-	if (session_destroy()) {
-		?> 
-			<script >
-				localStorage.removeItem('online_status') 
-				localStorage.removeItem('status') 
-			</script>  
-		<?php
-	}
+	// header("Location: ../");
 ?>
