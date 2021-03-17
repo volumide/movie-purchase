@@ -1,16 +1,20 @@
 <?php
+	include_once '../misc/header.php';
 	require_once '../connections/connection.php';
 	$dbConnection = (new Conn())->connect();
 	$message;
+	$allUsers= [];
 	$user;
 	$id = "";
-	$allUsers = [];
 	
+	// query all user table for admin and update profile 
 	$query = "SELECT * FROM `users`";
 	if (isset($_GET['id'])) {
 		$id = $_GET['id'];
+		// this queries the database and id is provided
 		$query .= "WHERE `id` = '$id'";
 	}
+
 	$result = $dbConnection->query($query);
 	if ($result->num_rows > 0) while ($rows = $result->fetch_assoc()){
 		if ($id){
@@ -62,10 +66,27 @@
 		} 
 		else{
 			array_push($allUsers, $rows);
-			var_dump($rows);
-		} 
+			// var_dump($rows);
+		}
 	}	
 	else $message = "Not result found";
+	
+	require_once '../models/isadmin.php';
+	$authenticate = getSession($_SESSION['status']);
+	if ($authenticate === 'eligible'){
+		echo count(($allUsers));
+		foreach ($allUsers as  $user) {
+			?>
+				<div style="padding: 5px;">
+					<p> <?php echo $user['fullname'] ?></p>
+					 <p> <?php echo $user['email'] ?></p>
+					<p> <?php echo $user['phone'] ?></p>
+					<p> <?php echo $user['gender'] ?></p> 
+				</div>
+			<?php
+		}
+	}
+	// echo "not an admin";
 
 ?>
 	
