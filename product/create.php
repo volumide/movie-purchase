@@ -10,6 +10,7 @@
 		header("Location: ../");
 		exit();
 	}
+	require  '../admin/header.php';
 	// error_reporting(0);
 	$dbConnection = (new Conn())->connect();
 	$genres = (new Genre($dbConnection))->getGenre();

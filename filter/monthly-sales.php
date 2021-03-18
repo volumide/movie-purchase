@@ -8,7 +8,8 @@
 		header("Location: ../");
 		exit();
 	}
-
+	require  '../admin/header.php';
+	echo "<div>";
 	$dbConnection = (new Conn())->connect();
 	$responses = [];
 	$dateCategory = [];

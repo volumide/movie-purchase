@@ -1,6 +1,5 @@
 <?php
 	session_start();
-	echo "<h1>All available Films</h1>";
 	require_once '../connections/connection.php';
 	require_once './productsController.php';
 	require_once '../models/isadmin.php';
@@ -9,6 +8,9 @@
 		header("Location: ../");
 		exit();
 	}
+
+	require  '../admin/header.php';
+	echo "<div><h1>All available Films</h1>";
 
 	$dbConnection = (new Conn())->connect();
 	$products = new Products($dbConnection);

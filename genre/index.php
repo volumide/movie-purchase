@@ -1,14 +1,16 @@
 <?php
 	session_start();
-	echo "<h1> All available genre </h1>";
 	require_once '../connections/connection.php';
 	require_once './genreController.php';
 	require_once '../models/isadmin.php';
-
+	
 	if ( getSession($_SESSION['status']) !== 'not eligible'){
 		header("Location: ../");
 		exit();
 	}
+	require  '../admin/header.php';
+
+	echo "<div><h1> All available genre </h1>";
 
 	$dbConnection = (new Conn())->connect();
 	if (isset($_POST['id'])) {

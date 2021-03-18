@@ -8,6 +8,8 @@
 		header("Location: ../");
 		exit();
 	}
+	require  '../admin/header.php';
+	echo "<div>";
 ?>
 	<form action="" method="POST">
 		<h1>Filter age greater than 50 </h1>

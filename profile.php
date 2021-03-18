@@ -112,6 +112,4 @@
 	// echo "not an admin";
 ?>
 	
-<?php
-	$dbConnection->close();
-?>
+<?php $dbConnection->close(); ?>

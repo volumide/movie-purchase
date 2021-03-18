@@ -17,6 +17,8 @@
 		$message = "unable to perfom the operation";
 		return;
 	}
+	require  '../admin/header.php';
+	echo "<div>";
 
 	// $product;
 	$id = $_GET['id'];
