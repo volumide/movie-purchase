@@ -1,6 +1,5 @@
 <?php 
 	include_once './misc/header.php';
-	if ($_SESSION['id']) header('Location: ./');
 ?>
 	<!-- <form action="./auth/signup.php" method="POST">
 		<div>

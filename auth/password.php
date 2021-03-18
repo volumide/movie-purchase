@@ -1,18 +1,18 @@
-<?php include_once '../misc/header.php'; ?>
+<?php include_once '../misc/header.php'; var_dump($_SESSION);?>
 <form action="" method="POST">
 	<div>
 		<label for="opass">Old password</label>
-		<input type="password" name="opass" id="opass">
+		<input type="password" name="opass" id="opass" class="mt-2 w-full border rounded p-4">
 	</div>
 	<div>
 		<label for="npass">New password</label>
-		<input type="password" name="npass"  id="npass">
+		<input type="password" name="npass"  id="npass" class="mt-2 w-full border rounded p-4">
 	</div>
 	<div>
 		<label for="cpass">Confirm new password</label>
-		<input type="password" name="cpass" id="cpass">
+		<input type="password" name="cpass" id="cpass" class="mt-2 w-full border rounded p-4">
 	</div>
-	<button type="submit" name="submit">Save</button>
+	<button type="submit" name="submit" class="mt-4 py-4 px-4 bg-black text-white rounded w-full font-bold">Save</button>
 </form>
 <?php
 	require_once '../connections/connection.php';

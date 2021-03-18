@@ -1,5 +1,5 @@
 <?php
-	include_once './misc/header.php';
+	require './misc/header.php';
 	require_once "./connections/connection.php";
 	require_once "./product/productsController.php";
 	$dbConnection = ((new Conn))->connect();
@@ -23,13 +23,12 @@
 									<p class="text-sm text-gray-900">
 										<?php echo $product['description'] ?>
 									</p>
-									<div class="mt-1 mb-4 mr-1 text-4xl font-bold sm:text-5xl"><?php echo  "$".$product['price'] ?></div>
-									</div>
+									<div class="mt-1 mb-4 mr-1 text-3xl font-bold"><?php echo  "$".$product['price'] ?></div>
 									<a
 									href="product.php?id=<?php echo $product['id'] ?>"
-									class="inline-flex items-center text-white justify-center py-6 px-6 font-medium rounded bg-black hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+									class="w-full inline-flex items-center text-white justify-center py-6 px-6 font-medium rounded bg-black hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
 									>
-										Buy Product
+										View
 									</a>
 								</div>
 							</div>
