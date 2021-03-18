@@ -10,6 +10,8 @@
 	$currentDate = strval(date('Y-m-d'));
 	$session_name = "";
 	$status = "";
+
+	// var_dump($_SESSION);
 	if ($_SESSION){
 		$session_name = $_SESSION['name'];
 		$status = $_SESSION['status'];
@@ -18,9 +20,10 @@
 	$products = (new Products($dbConnection, $_GET['id']))->productQUery();
 
 	if (is_array($products)) {
-		$product = $products[0];
+		$product = $products;
 		?>
 			<h1> <?php echo $product['title'] ?> </h1>
+			<p> <?php echo $product['name'] ?> </p>
 			<p> <?php echo $product['description'] ?> </p>
 			<h3> <?php echo $product['price'] ?> </h3>
 			<form action="" method="post">
@@ -31,7 +34,7 @@
 
 	if (isset($_POST['purchase'])) {
 		if(!$session_name){
-			echo "Sign up to purchase this app";
+			echo "Sign up to buy";
 			return;
 		}
 

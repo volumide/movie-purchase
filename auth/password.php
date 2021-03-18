@@ -1,3 +1,4 @@
+<?php include_once '../misc/header.php'; ?>
 <form action="" method="POST">
 	<div>
 		<label for="opass">Old password</label>
@@ -44,7 +45,7 @@
 				return;
 			}
 		}
-// new password 12345
+	// new password 12345
 		if ($newPassword !== $confirmPassword) $message = "confirm password does not match";
 		else{
 			$newPassword = password_hash($newPassword, PASSWORD_BCRYPT);

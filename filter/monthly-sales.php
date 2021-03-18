@@ -3,26 +3,31 @@
 	require_once '../connections/connection.php';
 	require_once '../models/isadmin.php';
 
-	$authenticate = getSession($_SESSION['status']);
-	if ($authenticate === 'not eligible'){
+
+	if (getSession($_SESSION['status']) !== 'not eligible'){
 		header("Location: ../");
 		exit();
 	}
 
 	$dbConnection = (new Conn())->connect();
-	$authenticate = getSession($_SESSION['status']);
 	$responses = [];
 	$dateCategory = [];
 	// $finalResult = [];
-	$query = "SELECT * FROM `purchases`";
+	$query = "SELECT   purchases.* ,users.* FROM `users` LEFT JOIN purchases ON users.id = purchases.user_id" ;
 	
-	$result = $dbConnection->query($query);
+	$result = $dbConnection->query($query) or die($dbConnection->error);
 
-	if ($result->num_rows > 0) while ($rows = $result->fetch_assoc()) array_push($responses, $rows);
-
-
+	while ($rows = $result->fetch_assoc()) array_push($responses, $rows);
+	
+	// var_dump($responses)
+	// echo json_encode(($responses));
+	// echo "<br> ". count($responses);
+	// return;
 	// collect all dates on database
-	foreach ($responses as $response) array_push($dateCategory, substr($response['purchase_date'], 0, -3));
+	foreach ($responses as $response){
+		if ($response['purchase_date']) array_push($dateCategory, substr($response['purchase_date'], 0, -3));
+	} 
+
 	
 	// remove duplicate values from date array
 	$uniqCategory = array_unique($dateCategory);
@@ -36,12 +41,25 @@
 		]
 	*/
 	$makeDateKey = array_fill_keys($uniqCategory, []);
-
-	// push all values to there corresponding purchased fate to calculate number of sales per day
+	
+	// push all values to there corresponding purchases to calculate number of sales per day
 	foreach($uniqCategory as $cat)
-		foreach($responses as $response)
+		foreach($responses as $response){
 			if(substr($response['purchase_date'], 0, -3) === $cat) array_push($makeDateKey[$cat], $response);
-		
-	var_dump($uniqCategory);
-	var_dump($makeDateKey);
+		}
+	
+		// echo count($makeDateKey['2021-03']);
+	echo "<h1> Monthly sales </h1>";
+	foreach ($uniqCategory as $key => $value) {
+		?>
+			<p><?php echo $value; ?></p>
+			<p>Total monthly sales : <?php echo count($makeDateKey[$value]); ?></p>
+		<?php
+
+		foreach($makeDateKey[$value] as $monthlySales){
+			?> 
+				<p> <?php echo $monthlySales['product'] ." -> ". $monthlySales['fullname']; ?></p>  
+			<?php
+		}
+	}
 ?>

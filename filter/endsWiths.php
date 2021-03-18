@@ -5,14 +5,20 @@
 	require_once '../models/isadmin.php';
 
 	$authenticate = getSession($_SESSION['status']);
-	if ($authenticate === 'not eligible'){
+	if ($authenticate !== 'not eligible'){
 		header("Location: ../");
 		exit();
 	}
 
 	$dbConnection = (new Conn())->connect();
 	$products = (new Products($dbConnection))->productEndWithS();
-	
-	var_dump($products);
-
+	if (is_array($products)) {
+		foreach ($products as $product) {
+			?>
+				<p>
+					<?php echo $product['title'] ."<br>". $product['description']; ?>
+				</p>
+			<?php
+		}
+	}
 ?>
