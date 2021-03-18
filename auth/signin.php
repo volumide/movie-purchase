@@ -1,6 +1,8 @@
 <?php
 	session_start();
 	require_once '../connections/connection.php';
+	if ($_SESSION['id']) header('Location: ../');
+
 	$dbConnection = (new Conn())->connect();
 	
 	$email = $_POST['email'];

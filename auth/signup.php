@@ -2,6 +2,8 @@
 	// error_reporting(0);
 	session_start();
 	require '../connections/connection.php';
+	if ($_SESSION['id']) header('Location: ../');
+
 	$dbConnection = (new Conn())->connect();
 	
 	$name = $_POST['name'];
@@ -41,7 +43,11 @@
 		if ($isAdmin === "yes") {
 			$query = "INSERT INTO `admin` (`user_id`, `key`) VALUES ($last_id, $secretKey)";
 			$message = ($dbConnection->query($query)) ? "You are now an admin" : "Error $dbConnection->error";
-		} else echo "registeration successfull";
+		} else{
+			echo "registeration successfull";
+			sleep(5);
+			header("Location: ../");
+		} 
 	}else  echo"Error $dbConnection->error";
 
 	$dbConnection->close();
