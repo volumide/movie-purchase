@@ -1,21 +1,24 @@
-<?php include_once '../misc/header.php'; var_dump($_SESSION);?>
-<form action="" method="POST">
-	<div>
-		<label for="opass">Old password</label>
-		<input type="password" name="opass" id="opass" class="mt-2 w-full border rounded p-4">
+<?php include_once './misc/header.php'; 
+	if (!$_SESSION) header('Location ./');
+?>
+<h1 class="text-center py-5 text-3xl font-semibold">Change Password</h1>
+<form action="" method="POST" class="sm:w-2/5 mx-auto">
+	<div class="py-2">
+		<label for="opass" class="font-semibold">Old password</label>
+		<input type="password" name="opass" id="opass" class="mt-2 w-full border rounded p-4 focus:outline-none">
 	</div>
-	<div>
-		<label for="npass">New password</label>
-		<input type="password" name="npass"  id="npass" class="mt-2 w-full border rounded p-4">
+	<div class="py-2">
+		<label for="npass" class="font-semibold">New password</label>
+		<input type="password" name="npass"  id="npass" class="mt-2 w-full border rounded p-4 focus:outline-none">
 	</div>
-	<div>
-		<label for="cpass">Confirm new password</label>
-		<input type="password" name="cpass" id="cpass" class="mt-2 w-full border rounded p-4">
+	<div class="py-2">
+		<label for="cpass" class="font-semibold">Confirm new password</label>
+		<input type="password" name="cpass" id="cpass" class="mt-2 w-full border rounded p-4 focus:outline-none">
 	</div>
 	<button type="submit" name="submit" class="mt-4 py-4 px-4 bg-black text-white rounded w-full font-bold">Save</button>
 </form>
 <?php
-	require_once '../connections/connection.php';
+	require_once './connections/connection.php';
 	$dbConnection = (new Conn())->connect();
 	$message;
 	
