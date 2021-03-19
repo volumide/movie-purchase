@@ -13,10 +13,6 @@
 		<div class="flex flex-col items-center w-full">
 	<?php
 ?>
-	<!-- <form action="" method="POST">
-		<h1 class="text-2xl font-semibold">Filter age greater than 50 </h1>
-		<button name="age" type="submit" class="text-lg text-blue-500 font-semi-bold" >Filter</button>
-	</form> -->
 
 <?php
 
@@ -28,33 +24,54 @@
 	$result = $dbConnection->query($query);
 	if ($result->num_rows > 0) while ($rows = $result->fetch_assoc()) array_push($responses, $rows);
 
+	?> 
+		<div class="flex flex-col items-center  w-full"> 
+		<div class="p-4">
+			<a href="../filter/users.php?purchases=all" class="p-3 bg-black text-white rounded font-semibold">Users Buy counts</a>
+			<a href="../filter/users.php?age=age" class="p-3 bg-black text-white rounded font-semibold">Age > 50</a>
+		</div>
+	<?php
 
-	if (isset($_POST['age'])) {
-		$ageAbove50 = $_POST['age'];
+	if (isset($_GET['age']) && isset($_GET['age']) == "age") {
+		// user with age greate than 50 logic here
+		?>
+			<h1 class="py-5 text-3xl font-semibold"> Users older than 50yrs </h1>
+			<div class=" w-2/5" >
+			<div class="p-4 m-1 flex items-center bg-gray-700 rounded">
+				<p class="mr-4 flex-1 text-white  capitalize font-semibold text-lg"> Name </p>
+				<p class="mr-4 flex-1 text-white capitalize font-semibold text-lg"> Email </p>
+				<p class="mr-4 flex-1 text-white capitalize font-semibold text-lg"> Date Of Birth </p>
+			</div>
+		<?php
+
+		$ageAbove50 = $_GET['age'];
+
 		foreach ($responses as $response) {
 			$currentDate = new DateTime(strval(date('Y-m-d')));
-			// echo $response['dob'];
-			// return;
 			$userYear = new DateTime((strval($response['dob'])));
 			$ageDiff = ($userYear->diff($currentDate))->format('%Y');
-			// echo $ageDiff;
-			// return;
 			if ($ageDiff > 50) {
 				array_push($ageFilter, $response);
 			}
 		}
+
 		foreach ($ageFilter as$user) {
-			echo $user["fullname"];
+			?>
+				<div class="p-4 m-1  flex items-center bg-gray-300 rounded">
+					<p class="flex-1  capitalize font-semibold text-lg"> <?php echo $user['fullname']; ?> </p>
+					<p class=" flex-1 capitalize font-semibold text-lg"> <?php echo   $user['email'];  ?> </p>
+					<p class=" flex-1 capitalize font-semibold text-lg"> 	<?php echo $user['dob'] ?></p>
+				</div>
+			<?php
 		}
 		return;
 	}
 
-	// start of table to show all registered user excluding the admin
 	if (!isset($_POST['age']) && !isset($_GET['purchases'])) {
+		// start of table to show all registered user excluding the admin
 		?>
-			<div class="flex flex-col items-center  w-full">
-				<h1 class="py-5 text-3xl font-semibold"> All current users </h1>
-				<div class=" w-4/5" >
+			<h1 class="py-5 text-3xl font-semibold"> All current users </h1>
+			<div class=" w-4/5" >
 				<div class="p-4 m-1 flex items-center bg-gray-600 rounded">
 					<p class="mr-4 flex-1  capitalize font-semibold text-lg text-white"> Name</p>
 					<p class="mr-4 flex-1  capitalize font-semibold text-lg text-white"> Email </p>
@@ -67,9 +84,13 @@
 
 	if (isset($_GET['purchases']) && isset($_GET['purchases']) =="all"){
 		?>
-		<div class="flex flex-col items-center  w-full">
 			<h1 class="py-5 text-3xl font-semibold"> Count of users purchases </h1>
 			<div class=" w-2/5" >
+			<div class="p-4 m-1 flex items-center bg-gray-700 rounded">
+				<p class="mr-4 flex-1 text-white  capitalize font-semibold text-lg"> Name </p>
+				<p class="mr-4 flex-1 text-white capitalize font-semibold text-lg"> Email </p>
+				<p class="mr-4 flex-1 text-white  font-semibold text-lg"> Total purchase(s) made </p>
+			</div>
 		<?php
 	}
 
@@ -89,16 +110,16 @@
 				if ($count > 0) {
 					?>
 						<div class="p-4 m-1 flex items-center bg-gray-300 rounded">
-							<p class="mr-4 flex-auto  capitalize font-semibold text-lg"> <?php echo $response['fullname']; ?> </p>
-							<p class="pl-4 flex-initial capitalize font-semibold text-lg"> <?php echo   $response['email--------'];  ?> </p>
-							<p class="pl-4 flex-initial capitalize font-semibold text-lg"> <?php echo   "Purchased ($count) movie(s)" ;  ?> </p>
+							<p class="mr-4 flex-1  capitalize font-semibold text-lg"> <?php echo $response['fullname']; ?> </p>
+							<p class=" flex-1 capitalize font-semibold text-lg"> <?php echo   $response['email'];  ?> </p>
+							<p class=" flex-1 capitalize font-semibold text-lg"> <?php echo   "($count)" ;  ?> </p>
 						</div>
 					<?php
 				}	
 			}
 		}
 		// table body for all users 
-		if (!isset($_POST['age']) && !isset($_GET['purchases'])){
+		if (!isset($_GET['age']) && !isset($_GET['purchases'])){
 			?>
 			<div class="p-4 m-1 flex items-center bg-gray-300 rounded">
 				<p class="mr-4 flex-1  capitalize font-semibold text-lg"> <?php echo $response['fullname']; ?> </p>
