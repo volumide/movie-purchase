@@ -15,10 +15,15 @@
 
 			$result = $this->dbConnection->query($query) or die($this->dbConnection->error);
 			while ($rows = $result->fetch_assoc()) array_push($this->results, $rows);	
-			if ($this->id && $this->id !== "") {
+			if ($this->id) {
+				echo $this->id;
 				foreach ($this->results as $result) 
-					if (intval($result['id']) == intval($this->id)) return $result;
-					else return "no mtach";
+					if ($result['id'] === $this->id){
+						// var_dump($result);
+						// echo $result;
+						return $result;
+					} 
+					return "no mtach". $this->dbConnection->error;
 			}
 			// else $this->results = "Not result found";
 			return $this->results;

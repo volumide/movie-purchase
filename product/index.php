@@ -29,14 +29,14 @@
 
 	if (is_array($allProduct)) {
 		?>
-			<ul class="grid grid-cols-3 gap-4">
-				<!-- <a href="../filter/action-genre.php" class="bg-green-700 py-3 px-5 block rounded text-white font-semibold">action genre</a> -->
+			<ul class="grid grid-cols-3 gap-4 py-6 px-6">
+				<a href="../filter/action-genre.php" class="bg-green-700 py-3 px-5 block rounded text-white font-semibold flex items-center justify-center text-3xl">All Action Genre</a>
 		<?php
 		foreach ($allProduct as $product){
 			?>
 				<li class="flex flex-col bg-white rounded shadow-md hover:shadow ">
-					<div class="relative w-full" style=" height:300px">
-						<img src="https://images.pexels.com/photos/3184305/pexels-photo-3184305.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260" class="object-cover w-full h-full rounded-t" alt="Plan" />
+					<div class="relative w-full">
+						<img src="https://images.pexels.com/photos/3184305/pexels-photo-3184305.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260" class="object-cover w-full rounded-t" alt="Plan" />
 					</div>
 					<div class="p-6">
 						<p class="inline-block py-3  text-xs font-semibold text-teal-900 uppercase rounded-full bg-teal-accent-400">
@@ -58,5 +58,6 @@
 				</li>
 			<?php
 		}
+		?> </ul <?php
 	}
 ?>

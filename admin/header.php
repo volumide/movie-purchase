@@ -8,10 +8,11 @@
 			<title>Document</title>
 		</head>
 		<body>
-		<div class="flex flex-row h-screen">
-			<div class="py-5 pt-6 h-full bg-black flex-none sm:w-1/6 px-5 text-white font-semibold">
-				<h2 class="py-6 px-6 font-bold">Admin</h2>
-				<ul class="px-6">
+		<div class="flex flex-row">
+			<div class="min-h-screen flex-none bg-black sm:w-1/6 px-5 text-white font-semibold">
+			<div class="py-5 pt-6 sticky top-0 bg-dark">
+				<h2 class="py-6 px-6 font-bold" style="width: 100%;">Admin</h2>
+				<ul class="px-6 ">
 					<li class="py-3"><a href="#">Home</a></li>
 
 					<li class="py-3">
@@ -31,4 +32,5 @@
 						<a href="../filter/users.php" class="block py-3">All users</a>
 					</li>
 				</ul>
+			</div>
 			</div>
