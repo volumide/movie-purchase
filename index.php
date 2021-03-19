@@ -15,7 +15,11 @@
 						?>
 							<div class="flex flex-col transition duration-300 bg-white rounded shadow-sm hover:shadow">
 								<div class="relative w-full h-52">
-									<img src="https://d13ezvd6yrslxm.cloudfront.net/wp/wp-content/images/2018-bestposters-spidermanspiderverse-700x1038.jpg" class="object-cover w-full h-full rounded-t" alt="Plan" />
+								<div class="relative w-full">
+						<div style="height: 300px; object-fit:cover; overflow:hidden;">
+							<img src="https://d13ezvd6yrslxm.cloudfront.net/wp/wp-content/images/2018-bestposters-spidermanspiderverse-700x1038.jpg" class="object-cover w-full h-100 rounded-t" alt="Plan" />
+						</div>
+					</div>
 								</div>
 								<div class="flex flex-col justify-between flex-grow p-8 border border-t-0 rounded-b">
 									<div>

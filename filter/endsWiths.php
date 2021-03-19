@@ -22,7 +22,11 @@
 			?>
 				<li class="flex flex-col bg-white rounded shadow-md hover:shadow ">
 					<div class="relative w-full">
-						<img src="https://images.pexels.com/photos/3184305/pexels-photo-3184305.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260" class="object-cover w-full rounded-t" alt="Plan" />
+					<div class="relative w-full">
+						<div style="height: 300px; object-fit:cover; overflow:hidden;">
+							<img src="https://d13ezvd6yrslxm.cloudfront.net/wp/wp-content/images/2018-bestposters-spidermanspiderverse-700x1038.jpg" class="object-cover w-full h-100 rounded-t" alt="Plan" />
+						</div>
+					</div>
 					</div>
 					<div class="p-6">
 						<p class="text-lg font-semibold capitalize"> <?php echo $product['title'] ?> </p>

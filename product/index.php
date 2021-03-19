@@ -30,13 +30,16 @@
 	if (is_array($allProduct)) {
 		?>
 			<ul class="grid grid-cols-3 gap-4 py-6 px-6">
-				<a href="../filter/action-genre.php" class="bg-green-700 py-3 px-5 block rounded text-white font-semibold flex items-center justify-center text-3xl">All Action Genre</a>
+				<a href="../filter/action-genre.php" class="bg-blue-700 py-3 px-5 block rounded text-white font-semibold flex items-center justify-center text-3xl">All Action Genre</a>
+				<a href="../filter/endsWiths.php" class="bg-blue-400 py-3 px-5 block rounded text-white font-semibold flex items-center justify-center text-3xl">Ends with "S"</a>
 		<?php
 		foreach ($allProduct as $product){
 			?>
 				<li class="flex flex-col bg-white rounded shadow-md hover:shadow ">
 					<div class="relative w-full">
-						<img src="https://images.pexels.com/photos/3184305/pexels-photo-3184305.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260" class="object-cover w-full rounded-t" alt="Plan" />
+						<div style="height: 300px; object-fit:cover; overflow:hidden;">
+							<img src="https://d13ezvd6yrslxm.cloudfront.net/wp/wp-content/images/2018-bestposters-spidermanspiderverse-700x1038.jpg" class="object-cover w-full h-100 rounded-t" alt="Plan" />
+						</div>
 					</div>
 					<div class="p-6">
 						<p class="inline-block py-3  text-xs font-semibold text-teal-900 uppercase rounded-full bg-teal-accent-400">
