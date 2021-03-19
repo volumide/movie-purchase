@@ -10,9 +10,9 @@
 	}
 	require  '../admin/header.php';
 	?> 
-	<div class="flex flex-col items-center  w-full">
-		<h1 class="py-5 text-3xl font-semibold"> All available genre </h1>
-		<div class=" w-2/5" >
+		<div class="flex flex-col items-center  w-full">
+			<h1 class="py-5 text-3xl font-semibold"> All available genre </h1>
+			<div class=" w-2/5" >
 	<?php
 
 	$dbConnection = (new Conn())->connect();
