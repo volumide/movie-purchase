@@ -42,49 +42,54 @@
 				<div class="py-10">
 					<h1 class="sm:w-3/6 mx-auto text-4xl text-center font-semibold pb-11"> <?php echo trim($rows['fullname'])."'s Profile" ?> </h1>
 				</div>
-				<form action="" method="POST" class="sm:w-2/5 mx-auto">
-					<div class="py-4">
-						<label for="name" class="py-4 font-semibold">Name</label>
-						<input type="text" name="name" id="name" value="<?php echo $rows['fullname'] ?>" disabled class="mt-2 w-full border rounded p-4">
-					</div>
-					<div class="py-4">
-						<label for="email" class="py-4 font-semibold">Email</label>
-						<input type="email" name="email" id="email" value="<?php echo $rows['email'] ?>" class="mt-2 w-full border rounded p-4" disabled>
-					</div>
-					<div class="py-4">
-						<label for="country" class="py-4 font-semibold">Address</label>
-						<input type="text" name="country" id="country" value="<?php echo $rows['country'] ?>" class="mt-2 w-full border rounded p-4" disabled>
-					</div>
-					<div class="py-4">
-						<label for="phone" class="py-4 font-semibold">Phone</label>
-						<input type="number" name="phone" id="phone" value="<?php echo $rows['phone'] ?>" class="mt-2 w-full border rounded p-4" disabled>
-					</div>
-					<div class="py-4">
-						<label for="gender" class="py-4 font-semibold">Gender</label>
-						<input type="text" name="gender" id="gender" value="<?php echo $rows['gender'] ?>" class="mt-2 w-full border rounded p-4" disabled>
-					</div>
-					<div class="py-4">
-						<label for="dob" class="py-4 font-semibold">Date Of Birth</label>
-						<input type="date" name="dob" id="dob" value="<?php echo $rows['dob'] ?>" class="mt-2 w-full border rounded p-4" disabled>
-						<!-- <input type="text" name="dob" id="dob"> -->
-					</div>
-					<button type="submit" id="update" name="submit" style="display: none;" class="py-4 px-4 bg-black text-white rounded w-full font-bold">Update</button>
-					<button type="button" id="edit" class="py-4 px-4 bg-blue-800 text-white rounded w-full font-bold">Edit Profile</button>
-					<script>
-						const docs = document.querySelectorAll("input")
-						const edit = document.getElementById("edit")
-						const update = document.getElementById("update")
+				<div class="sm:w-2/5 mx-auto flex">
+					<form action="" method="POST" class="flex-1">
+						<div class="py-4">
+							<label for="name" class="py-4 font-semibold">Name</label>
+							<input type="text" name="name" id="name" value="<?php echo $rows['fullname'] ?>" disabled class="mt-2 w-full border rounded p-4">
+						</div>
+						<div class="py-4">
+							<label for="email" class="py-4 font-semibold">Email</label>
+							<input type="email" name="email" id="email" value="<?php echo $rows['email'] ?>" class="mt-2 w-full border rounded p-4" disabled>
+						</div>
+						<div class="py-4">
+							<label for="country" class="py-4 font-semibold">Address</label>
+							<input type="text" name="country" id="country" value="<?php echo $rows['country'] ?>" class="mt-2 w-full border rounded p-4" disabled>
+						</div>
+						<div class="py-4">
+							<label for="phone" class="py-4 font-semibold">Phone</label>
+							<input type="number" name="phone" id="phone" value="<?php echo $rows['phone'] ?>" class="mt-2 w-full border rounded p-4" disabled>
+						</div>
+						<div class="py-4">
+							<label for="gender" class="py-4 font-semibold">Gender</label>
+							<input type="text" name="gender" id="gender" value="<?php echo $rows['gender'] ?>" class="mt-2 w-full border rounded p-4" disabled>
+						</div>
+						<div class="py-4">
+							<label for="dob" class="py-4 font-semibold">Date Of Birth</label>
+							<input type="date" name="dob" id="dob" value="<?php echo $rows['dob'] ?>" class="mt-2 w-full border rounded p-4" disabled>
+							<!-- <input type="text" name="dob" id="dob"> -->
+						</div>
+						<button type="submit" id="update" name="submit" style="display: none;" class="py-4 px-4 bg-black text-white rounded w-full font-bold">Update</button>
+						<button type="button" id="edit" class="py-4 px-4 bg-blue-800 text-white rounded w-full font-bold">Edit Profile</button>
+						<script>
+							const docs = document.querySelectorAll("input")
+							const edit = document.getElementById("edit")
+							const update = document.getElementById("update")
 
-						edit.addEventListener('click', (e)=>{
-							e.preventDefault()
-							docs.forEach(e =>{
-								if(e.name !== 'dob' && e.name !== 'gender') e.disabled = false
+							edit.addEventListener('click', (e)=>{
+								e.preventDefault()
+								docs.forEach(e =>{
+									if(e.name !== 'dob' && e.name !== 'gender') e.disabled = false
+								})
+								edit.style.display = 'none'
+								update.style.display = 'block'
 							})
-							edit.style.display = 'none'
-							update.style.display = 'block'
-						})
-					</script>
-				</form>
+						</script>
+					</form>
+					<div class="flex-initial sm:ml-4 py-6 ">
+						<a href="./password.php?id=<?php echo $id ?>" class="   bg-black text-white p-4 font-semibold rounded hover:bg-blue-800">Change Password</a>
+					</div>
+				</div>
 			<?php
 		} 
 		else{

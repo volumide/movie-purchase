@@ -19,17 +19,18 @@
 								</div>
 								<div class="flex flex-col justify-between flex-grow p-8 border border-t-0 rounded-b">
 									<div>
-									<div class="text-lg font-semibold"><?php echo $product['title'] ?></div>
-									<p class="text-sm text-gray-900">
-										<?php echo $product['description'] ?>
-									</p>
-									<div class="mt-1 mb-4 mr-1 text-3xl font-bold"><?php echo  "$".$product['price'] ?></div>
-									<a
-									href="product.php?id=<?php echo $product['id'] ?>"
-									class="w-full inline-flex items-center text-white justify-center py-6 px-6 font-medium rounded bg-black hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-									>
-										View
-									</a>
+										<div class="text-lg font-semibold"><?php echo $product['title'] ?></div>
+										<p class="text-sm text-gray-900">
+											<?php echo $product['description'] ?>
+										</p>
+										<div class="mt-1 mb-4 mr-1 text-3xl font-bold"><?php echo  "$".$product['price'] ?></div>
+										<a
+										href="product.php?id=<?php echo $product['id'] ?>"
+										class="w-full inline-flex items-center text-white justify-center py-6 px-6 font-medium rounded bg-black hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+										>
+											View
+										</a>
+									</div>
 								</div>
 							</div>
 						<?php

@@ -13,9 +13,22 @@
 				<h2 class="py-6 px-6 font-bold">Admin</h2>
 				<ul class="px-6">
 					<li class="py-3"><a href="#">Home</a></li>
-					<li class="py-3"><a href="../genre">Genre</a></li>
-					<li class="py-3"><a href="../product">Products</a></li>
-					<li class="py-3"><a href="../filter">Misc</a></li>
-					<li class="py-3"><a href="../filter/monthly-sales.php">Others</a></li>
+
+					<li class="py-3">
+						<small class="text-gray-700">genres</small>
+						<a href="../genre" class="block py-3">All genre</a> 
+						<a href="../genre/create.php" class="block py-3">New genre</a>
+					</li>
+
+					<li class="py-3">
+						<small class="text-gray-700">products</small>
+						<a href="../product" class="block py-3">All Products</a>
+						<a href="../product/create.php" class="block py-3">New product</a>
+					</li>
+
+					<li class="py-3">
+						<small class="text-gray-700">users</small>
+						<a href="../filter/users.php" class="block py-3">All users</a>
+					</li>
 				</ul>
 			</div>

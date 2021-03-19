@@ -9,8 +9,11 @@
 		exit();
 	}
 	require  '../admin/header.php';
-
-	echo "<div><h1> All available genre </h1>";
+	?> 
+	<div class="flex flex-col items-center  w-full">
+		<h1 class="py-5 text-3xl font-semibold"> All available genre </h1>
+		<div class=" w-2/5" >
+	<?php
 
 	$dbConnection = (new Conn())->connect();
 	if (isset($_POST['id'])) {
@@ -20,19 +23,21 @@
 
 	$genre = new Genre($dbConnection);
 	$allgenre =  $genre->getGenre();
-	if (is_array($allgenre)) 
+	if (is_array($allgenre)){
 		foreach ($allgenre as $singleGenre){
 			// echo $singleGenre["title"];
 			?>
-				<div>
-					<p> <?php echo $singleGenre['name'] ?> </p>
-					<form action="" method="post">
+				<div class="p-4 my-4 flex items-center bg-gray-300 rounded">
+					<p class="mr-4 flex-auto  capitalize font-semibold text-lg" > <?php echo $singleGenre['name'] ?> </p>
+					<form action="" method="post" class="pl-4 flex-initial">
 						<input type="text" name="id" value="<?php echo $singleGenre['id'] ?>" style="display: none;">
-						<button name="delete" id="delete" type="submit">Delete</button>
+						<button name="delete" id="delete" type="submit" class="p-3 rounded bg-black font-semibold text-white font-bold">Delete</button>
 					</form>
 				</div>
 
 			<?php
 		}
+		?> </div></div> <?php
+	}
 	else echo $allgenre;
 ?>

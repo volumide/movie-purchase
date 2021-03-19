@@ -12,8 +12,8 @@
 	echo "<div>";
 ?>
 	<form action="" method="POST">
-		<h1>Filter age greater than 50 </h1>
-		<button name="age" type="submit" >Filter</button>
+		<h1 class="text-2xl font-semibold">Filter age greater than 50 </h1>
+		<button name="age" type="submit" class="text-blue-500 font-semi-bold" >Filter</button>
 	</form>
 
 <?php

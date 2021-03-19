@@ -10,7 +10,12 @@
 	}
 
 	require  '../admin/header.php';
-	echo "<div><h1>All available Films</h1>";
+	?> 
+		<div class="flex flex-col items-center  w-full">
+			<h1 class="py-5 text-3xl font-semibold"> All available Films </h1>
+			<div class=" w-full px-6" >
+	<?php
+	// echo "<div><h1>All available Films</h1>";
 
 	$dbConnection = (new Conn())->connect();
 	$products = new Products($dbConnection);
@@ -24,24 +29,34 @@
 
 	if (is_array($allProduct)) {
 		?>
-			<ul>
+			<ul class="grid grid-cols-3 gap-4">
+				<!-- <a href="../filter/action-genre.php" class="bg-green-700 py-3 px-5 block rounded text-white font-semibold">action genre</a> -->
 		<?php
 		foreach ($allProduct as $product){
 			?>
-				<li>
-					<p> <?php echo $product['title'] ?> </p>
-					<p> <?php echo $product['description'] ?> </p>
-					<form action="" method="post">
-						<input type="text" name="delete"  
-							value="<?php echo $product['id'] ?>" 
-							style="display: none;"
-						>
-						<input type="submit" value="Delete" >
-					</form>
-					<a href="update.php?id=<?php echo $product['id'] ?>">Update Product</a>
+				<li class="flex flex-col bg-white rounded shadow-md hover:shadow ">
+					<div class="relative w-full" style=" height:300px">
+						<img src="https://images.pexels.com/photos/3184305/pexels-photo-3184305.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260" class="object-cover w-full h-full rounded-t" alt="Plan" />
+					</div>
+					<div class="p-6">
+						<p class="inline-block py-3  text-xs font-semibold text-teal-900 uppercase rounded-full bg-teal-accent-400">
+							<?php echo $product['name'] ?>
+						</p>
+						<p class="text-lg font-semibold capitalize"> <?php echo $product['title'] ?> </p>
+						<p class="text-sm text-gray-900 py-2"> <?php echo $product['description'] ?> </p>
+						<div class="flex">
+							<a href="update.php?id=<?php echo $product['id'] ?>" class="p-4 bg-black rounded text-white font-semibold">Update Product</a>
+							<form action="" method="post" class="ml-4">
+								<input type="text" name="delete"  
+									value="<?php echo $product['id'] ?>" 
+									style="display: none;"
+								>
+								<input type="submit" value="Delete" class="w-ful h-full bg-blue-900 cursor-pointer text-white p-4 rounded" >
+							</form>
+						</div>
+					</div>
 				</li>
 			<?php
 		}
 	}
-	else echo "<p> $allgenre </p>";
 ?>
