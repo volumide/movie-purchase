@@ -13,7 +13,7 @@
 			<div class="py-5 pt-6 sticky top-0 bg-dark">
 				<h2 class="py-6 px-6 font-bold" style="width: 100%;">Admin</h2>
 				<ul class="px-6 ">
-					<li class="py-3"><a href="#">Home</a></li>
+					<li class="py-3"><a href="../">Home</a></li>
 
 					<li class="py-3">
 						<small class="text-gray-700">genres</small>
@@ -25,6 +25,7 @@
 						<small class="text-gray-700">products</small>
 						<a href="../product" class="block py-3">All Products</a>
 						<a href="../product/create.php" class="block py-3">New product</a>
+						<a href="../filter/monthly-sales.php" class="block py-3">Monthly sales</a>
 					</li>
 
 					<li class="py-3">

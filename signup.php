@@ -1,5 +1,8 @@
 <?php 
 	include_once './misc/header.php';
+	if ($_SESSION) header("Location: ./");
+	$admin = (isset($_GET['admin']) || isset($_GET['admin']) === "admin") ? "admin": "";
+	// echo $admin;
 ?>
 	<!-- <form action="./auth/signup.php" method="POST">
 		<div>
@@ -43,7 +46,7 @@
         <h1 class="text-3xl md:text-4xl font-extrabold text-white my-2 md:my-0"> Sign up </h1>
       </div>
       <div class="w-full md:w-1/2 flex flex-col items-center bg-white py-5 md:py-8 px-4">
-        <form action="./auth/signup.php" method="POST" class="px-3 flex flex-col justify-center items-center w-full gap-3">
+        <form action="<?php echo ($admin) ? "./auth/signup.php?admin=$admin" : "./auth/signup.php?admin"; ?> " method="POST" class="px-3 flex flex-col justify-center items-center w-full gap-3">
 			<div class="w-full">
 				<label for="name" class="font-semibold">Fullname</label>
 				<input type="text" name="name" placeholder="Fullname..." id="name" class="mt-2 px-4 py-4 w-full rounded border border-gray-300 shadow-sm text-base placeholder-gray-700  focus:outline-none focus:border-blue-500">

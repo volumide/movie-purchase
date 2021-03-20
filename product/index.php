@@ -15,7 +15,6 @@
 			<h1 class="py-5 text-3xl font-semibold"> All available Films </h1>
 			<div class=" w-full px-6" >
 	<?php
-	// echo "<div><h1>All available Films</h1>";
 
 	$dbConnection = (new Conn())->connect();
 	$products = new Products($dbConnection);
@@ -31,7 +30,7 @@
 		?>
 			<ul class="grid grid-cols-3 gap-4 py-6 px-6">
 				<a href="../filter/action-genre.php" class="bg-blue-700 py-3 px-5 block rounded text-white font-semibold flex items-center justify-center text-3xl">All Action Genre</a>
-				<a href="../filter/endsWiths.php" class="bg-blue-400 py-3 px-5 block rounded text-white font-semibold flex items-center justify-center text-3xl">Ends with "S"</a>
+				<a href="../filter/end-with-s.php" class="bg-blue-400 py-3 px-5 block rounded text-white font-semibold flex items-center justify-center text-3xl">Ends with "S"</a>
 		<?php
 		foreach ($allProduct as $product){
 			?>

@@ -28,12 +28,19 @@
         <span class="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">Company</span>
       </a>
       <ul class="flex items-center hidden space-x-8 lg:flex">
-		  <?php 
+		<?php 
 			if ($_SESSION) {
+				if($_SESSION['status'] === "yes"){
+					?>
+						<li><a href="filter/users.php" aria-label="profile" title="Profile" class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Admin</a></li>
+					<?php
+				}else{
+					?>
+						<li><a href="profile.php?id=<?php echo $_SESSION['id']; ?>" aria-label="profile" title="Profile" class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Profile</a></li>
+					<?php
+				}
 				?>
-					<li><a href="profile.php?id=<?php echo $_SESSION['id']; ?>" aria-label="profile" title="Profile" class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Profile</a></li>
-					<li><a href="./auth/logout" aria-label="logout" title="Logout" class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Logout</a></li>
-					
+					<li><a href="./auth/logout.php" aria-label="logout" title="Logout" class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Logout</a></li>
 				<?php
 			}else{
 				?>

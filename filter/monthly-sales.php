@@ -3,28 +3,27 @@
 	require_once '../connections/connection.php';
 	require_once '../models/isadmin.php';
 
+	if (!$_SESSION) header("Location: ../");
 
-	if (getSession($_SESSION['status']) !== 'not eligible'){
+	if (getSession($_SESSION['status']) !== 'eligible'){
 		header("Location: ../");
 		exit();
 	}
 	require  '../admin/header.php';
-	echo "<div>";
 	$dbConnection = (new Conn())->connect();
 	$responses = [];
 	$dateCategory = [];
-	// $finalResult = [];
+
 	$query = "SELECT   purchases.* ,users.* FROM `users` LEFT JOIN purchases ON users.id = purchases.user_id" ;
 	
 	$result = $dbConnection->query($query) or die($dbConnection->error);
-
+	?> 
+		<div class="flex flex-col items-center w-full ">
+		<h1 class="py-5 text-3xl font-semibold">Monthly sales</h1> 
+		<div class=" w-1/3 px-6" >
+	<?php
 	while ($rows = $result->fetch_assoc()) array_push($responses, $rows);
 	
-	// var_dump($responses)
-	// echo json_encode(($responses));
-	// echo "<br> ". count($responses);
-	// return;
-	// collect all dates on database
 	foreach ($responses as $response){
 		if ($response['purchase_date']) array_push($dateCategory, substr($response['purchase_date'], 0, -3));
 	} 
@@ -50,17 +49,23 @@
 		}
 	
 		// echo count($makeDateKey['2021-03']);
-	echo "<h1> Monthly sales </h1>";
 	foreach ($uniqCategory as $key => $value) {
 		?>
-			<p><?php echo $value; ?></p>
-			<p>Total monthly sales : <?php echo count($makeDateKey[$value]); ?></p>
+			<div>
+				<p class="text-2xl font-semibold text-blue-800"><?php echo $value; ?></p>
+				<p class="py-3 px-3 rounded bg-blue-800 w-1/2 text-white text-2xl mb-3">Total sales : <?php echo count($makeDateKey[$value]); ?></p>
+			</div>
 		<?php
 
 		foreach($makeDateKey[$value] as $monthlySales){
 			?> 
-				<p> <?php echo $monthlySales['product'] ." -> ". $monthlySales['fullname']; ?></p>  
+				<div class="flex border-b-2">
+					<p class="text-lg p-3 font-semibold flex-auto"> <?php echo $monthlySales['fullname'] ; ?></p>  
+					<p class="p-3 font-semibold"> <?php echo  $monthlySales['product']; ?></p>
+				</div>
 			<?php
 		}
 	}
 ?>
+		</div>
+		</div>

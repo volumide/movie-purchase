@@ -1,6 +1,6 @@
 <?php 
 	include_once './misc/header.php';
-	// if ($_SESSION['id']) header('Location: ./');
+	if ($_SESSION) header("Location: ./");
  ?>
 
   <div class="py-5 w-full flex justify-center items-center">

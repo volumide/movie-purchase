@@ -4,7 +4,7 @@
 	require_once '../models/isadmin.php';
 
 	$authenticate = getSession($_SESSION['status']);
-	if ($authenticate !== 'not eligible'){
+	if ($authenticate !== 'eligible'){
 		header("Location: ../");
 		exit();
 	}

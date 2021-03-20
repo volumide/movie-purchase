@@ -3,7 +3,7 @@
 	require_once '../connections/connection.php';
 	require_once '../models/isadmin.php';
 
-	if (getSession($_SESSION['status']) === 'eligible'){
+	if (getSession($_SESSION['status']) !== 'eligible'){
 		header("Location: ../");
 		exit();
 	}

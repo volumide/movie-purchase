@@ -2,7 +2,7 @@
 	// error_reporting(0);
 	session_start();
 	require '../connections/connection.php';
-	if ($_SESSION['id']) header('Location: ../');
+	if ($_SESSION) header('Location: ../');
 
 	$dbConnection = (new Conn())->connect();
 	
@@ -10,7 +10,7 @@
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	$country = $_POST['country'];
-	$isAdmin = (isset($_GET['admin']) && isset($_GET['admin']) === 'admin') ? "yes" : "no";
+	$isAdmin = (isset($_GET['admin']) || isset($_GET['admin']) === 'admin') ? "yes" : "no";
 	$phone = $_POST['phone'];
 	$gender = $_POST['gender'];
 	$dateOfBirth = $_POST['dob'];
@@ -42,10 +42,12 @@
 		$last_id = $dbConnection->insert_id;
 		if ($isAdmin === "yes") {
 			$query = "INSERT INTO `admin` (`user_id`, `key`) VALUES ($last_id, $secretKey)";
-			$message = ($dbConnection->query($query)) ? "You are now an admin" : "Error $dbConnection->error";
+			$message = ($dbConnection->query($query)) ?
+				"You are now an admin" :
+				"Error $dbConnection->error";
+			echo $message;
 		} else{
 			echo "registeration successfull";
-			sleep(5);
 			header("Location: ../");
 		} 
 	}else  echo"Error $dbConnection->error";

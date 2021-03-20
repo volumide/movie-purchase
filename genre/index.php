@@ -4,7 +4,7 @@
 	require_once './genreController.php';
 	require_once '../models/isadmin.php';
 	
-	if ( getSession($_SESSION['status']) !== 'not eligible'){
+	if ( getSession($_SESSION['status']) !== 'eligible'){
 		header("Location: ../");
 		exit();
 	}

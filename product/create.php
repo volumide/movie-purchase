@@ -20,34 +20,36 @@
 		$title = $_POST['title'];
 		$genre = $_POST['genre'];
 		$price = $_POST['price'];
-		$cover = '';
+		$cover = $_FILES['cover']['name'];
 		$description = $_POST['desc'];
 		$dir = 'covers/';
 		$tempName = "";
 		$error = [];
 		
 
-		if ($_POST['cover']){
-			$cover = $_FILES['cover']['name'];
+		if ($_FILES['cover']['name']){
 			$tempName = $_FILES['cover']['tmp_name'];
 			$fileType = strtolower(pathinfo(basename($dir .$cover),PATHINFO_EXTENSION));
 			if (!getimagesize($tempName)) array_push($error, "file is not an image type"); 
-			if (!$fileType != "jpg" || !$fileType != "jpeg" || !$fileType != "png") array_push($error, "Only JPEG PNG and JPG file are accepted" );
-			if (($_FILES['cover']['size']) > 20000) array_push($error, "file size is too large");
+			
+			if ($fileType !== "jpg" && $fileType !== "jpeg" && $fileType !== "png") array_push($error, "Only JPEG PNG and JPG file are accepted" );
+			if (($_FILES['cover']['size']) > 100000) array_push($error, "file size is too large");
+			// echo $fileType;
+			// echo $_FILES['cover']['size'];
 		}
 		
 		if (count($error) > 0) {
 			foreach ($error as $value) {
 				echo $value;
-				return;
 			}
+			return;
 		}
 
-		if ($_POST['cover']) {
-			$moveImage =  move_uploaded_file($tempName, $dir);
+		if ($cover) {
+			$moveImage =  move_uploaded_file($tempName, $dir.$cover);
 		}
 
-		$query = "INSERT INTO `movies` (`title`, `genre_id`, `cover`,`price`, `description`) VALUES ('$title', '$genre', '$cover', '$price', '$description')";
+		$query = "INSERT INTO `movies` (`title`, `genre_id`, `cover`,`price`, `description`) VALUES ('$title', '$genre', 'covers/$cover', '$price', '$description')";
 	
 		if ($dbConnection->query($query)) $message = "Movie created successfully";
 		else $message = "Error $dbConnection->error";
@@ -65,7 +67,7 @@
 				<?php
 			}
 		?>
-		<form action="" method="POST" class="w-2/5 py-5">
+		<form action="" method="POST" class="w-2/5 py-5" enctype="multipart/form-data" >
 			<div class="pb-5">
 				<label class="block pb-3 for="title">Movie Title</label>
 				<input placeholder="movie title..." type="text" name="title" id="title" class="px-4 py-4 w-full rounded border border-gray-300 shadow-sm text-base placeholder-gray-700  focus:outline-none focus:border-blue-500 py-3">
@@ -87,7 +89,7 @@
 			</div>
 			<div class="pb-5">
 				<label class="block pb-3 for="cover">Movie cover</label>
-				<input placeholder="movie cover..." type="text" name="cover" id="cover" class="px-4 py-4 w-full rounded border border-gray-300 shadow-sm text-base placeholder-gray-700  focus:outline-none focus:border-blue-500 py-3">
+				<input placeholder="movie cover..." type="file"  name="cover" id="cover" class="px-4 py-4 w-full rounded border border-gray-300 shadow-sm text-base placeholder-gray-700  focus:outline-none focus:border-blue-500 py-3">
 			</div>
 			<div class="pb-5">
 				<label class="block pb-3 for="price">Price</label>
