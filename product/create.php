@@ -6,7 +6,7 @@
 	require_once '../models/isadmin.php';
 
 	$authenticate = getSession($_SESSION['status']);
-	if ($authenticate !== 'not eligible'){
+	if ($authenticate !== 'eligible'){
 		header("Location: ../");
 		exit();
 	}
@@ -33,7 +33,7 @@
 			if (!getimagesize($tempName)) array_push($error, "file is not an image type"); 
 			
 			if ($fileType !== "jpg" && $fileType !== "jpeg" && $fileType !== "png") array_push($error, "Only JPEG PNG and JPG file are accepted" );
-			if (($_FILES['cover']['size']) > 100000) array_push($error, "file size is too large");
+			// if (($_FILES['cover']['size']) > 100000) array_push($error, "file size is too large");
 			// echo $fileType;
 			// echo $_FILES['cover']['size'];
 		}

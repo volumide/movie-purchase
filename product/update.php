@@ -5,7 +5,7 @@
 	require_once '../genre/genreController.php';
 	require_once '../models/isadmin.php';
 
-	if (getSession($_SESSION['status']) !== 'not eligible'){
+	if (getSession($_SESSION['status']) !== 'eligible'){
 		header("Location: ../");
 		exit();
 	}
@@ -22,17 +22,15 @@
 	$id = $_GET['id'];
 	$message = "";
 	// check if form values are set and ready for query
-	if (isset($_POST['title']) || isset($_POST['genre']) || isset($_POST['cover']) || isset($_POST['desc']) ||isset($_POST['price'])) {
+	if (isset($_POST['title']) || isset($_POST['genre'])  || isset($_POST['desc']) ||isset($_POST['price'])) {
 		$title = $_POST['title'];
 		$genre = $_POST['genre'];
-		$cover = $_POST['cover'];
 		$price = $_POST['price'];
 		$description = $_POST['desc'];
 		if (intval($price)) {
 			$query = "UPDATE `movies` SET 
 				`title` = '$title',
 				`genre_id` = '$genre',
-				`cover` = '$cover',
 				`price` = '$price',
 				`description` = '$description'
 			WHERE `id` = '$id'";
@@ -83,7 +81,7 @@
 						</div>
 						<div class="pb-5">
 							<label class="block pb-3" for="cover">Cover</label>
-							<input type="text" name="cover" id="cover" value="<?php echo trim($product['cover'], " ");?>" class="px-4 py-4 w-full rounded border border-gray-300 shadow-sm text-base placeholder-gray-700  focus:outline-none focus:border-blue-500 py-3">
+							<input type="text" name="cover" id="cover" value="<?php echo trim($product['cover'], " ");?>" class="px-4 py-4 w-full rounded border border-gray-300 shadow-sm text-base placeholder-gray-700  focus:outline-none focus:border-blue-500 py-3" disabled>
 						</div>
 						<div class="pb-5">
 							<label class="block pb-3" for="price">Price</label>

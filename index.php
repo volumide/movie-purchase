@@ -6,7 +6,6 @@
 	$products = new Products($dbConnection);
 
 	$allProduct = $products->productQUery();
-	var_dump($_SESSION);
 	if (is_array($allProduct)) {
 		?>
 			<div  class="grid gap-5  md:grid-cols-4 sm:grid-cols-2 bg-white p-10 sm:mx-auto">

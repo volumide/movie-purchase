@@ -119,23 +119,15 @@
 			}
 		}
 		// table body for all users 
-		if (!isset($_GET['age']) && !isset($_GET['purchases'])){
+		if (!isset($_GET['age']) && !isset($_GET['purchases']) && $response['is_admin'] !== 'yes'){
 			?>
-			<div class="p-4 m-1 flex items-center bg-gray-300 rounded">
-				<p class="mr-4 flex-1  capitalize font-semibold text-lg"> <?php echo $response['fullname']; ?> </p>
-				<p class="mr-4 flex-1  capitalize font-semibold text-lg"> <?php echo $response['email']; ?> </p>
-				<p class="mr-4 flex-1  capitalize font-semibold text-lg"> <?php echo $response['phone']; ?> </p>
-				<p class="mr-4 flex-1  capitalize font-semibold text-lg"> <?php echo $response['gender']; ?> </p>
-				<p class="mr-4 flex-1  capitalize font-semibold text-lg"> <?php echo $response['country']; ?> </p>
-			</div>
-				<!-- <tr style="display: <?php echo ($response['is_admin'] == 'yes') ? "none" : ""; ?>">
-					<td class="border-gray-600 border rounded p-4"><?php echo $response['fullname']; ?></td>
-					<td class="border-gray-600 border rounded p-4"><?php echo $response['email']; ?></td>
-					<td class="border-gray-600 border rounded p-4"><?php echo $response['phone']; ?></td>
-					<td class="border-gray-600 border rounded p-4"><?php echo $response['gender']; ?></td>
-					<td class="border-gray-600 border rounded p-4"><?php echo $response['country']; ?></td>
-				</tr> -->
-
+				<div class="p-4 m-1 flex items-center bg-gray-300 rounded">
+					<p class="mr-4 flex-1  capitalize font-semibold text-lg"> <?php echo $response['fullname']; ?> </p>
+					<p class="mr-4 flex-1  capitalize font-semibold text-lg"> <?php echo $response['email']; ?> </p>
+					<p class="mr-4 flex-1  capitalize font-semibold text-lg"> <?php echo $response['phone']; ?> </p>
+					<p class="mr-4 flex-1  capitalize font-semibold text-lg"> <?php echo $response['gender']; ?> </p>
+					<p class="mr-4 flex-1  capitalize font-semibold text-lg"> <?php echo $response['country']; ?> </p>
+				</div>
 			<?php
 		}
 	}

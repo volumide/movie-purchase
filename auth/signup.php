@@ -10,7 +10,7 @@
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	$country = $_POST['country'];
-	$isAdmin = (isset($_GET['admin']) || isset($_GET['admin']) === 'admin') ? "yes" : "no";
+	$isAdmin = (isset($_GET['admin']) === 'admin') ? "yes" : "no";
 	$phone = $_POST['phone'];
 	$gender = $_POST['gender'];
 	$dateOfBirth = $_POST['dob'];

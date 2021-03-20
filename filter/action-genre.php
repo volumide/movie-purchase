@@ -13,7 +13,7 @@
 	$dbConnection = (new Conn())->connect();
 	$products = (new Products($dbConnection))->productQUery();
 	$response = [];
-		foreach ($products as $product) if ($product['name'] === 'action') array_push($response, $product);
+		foreach ($products as $product) if ($product['name'] === 'action' || $product['name'] === 'Action') array_push($response, $product);
 
 	?> 
 		<div class="flex flex-col items-center w-full">
@@ -21,11 +21,15 @@
 		<div class=" w-full px-6" >
 			<ul class="grid grid-cols-3 gap-4 py-6 px-6">
 	<?php
+
 	foreach ($response as $value) {
+		$cover = $value['cover'];
 		?>
 			<li class="flex flex-col bg-white rounded shadow-md hover:shadow ">
 				<div class="relative w-full">
-					<img src="https://images.pexels.com/photos/3184305/pexels-photo-3184305.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260" class="object-cover w-full rounded-t" alt="Plan" />
+					<div style="height: 250px; object-fit:cover; overflow:hidden;">
+						<img src=" <?php echo ($value['cover']) ?"../product/$cover" : "https://d13ezvd6yrslxm.cloudfront.net/wp/wp-content/images/2018-bestposters-spidermanspiderverse-700x1038.jpg"; ?> " class="object-cover h-full w-full h-100 rounded-t" alt="Plan" />
+					</div>
 				</div>
 				<div class="p-6">
 					<p class="inline-block py-3  text-xs font-semibold text-teal-900 uppercase rounded-full bg-teal-accent-400">

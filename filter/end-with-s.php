@@ -19,12 +19,13 @@
 	<?php
 	if (is_array($products)) {
 		foreach ($products as $product) {
+			$cover = $product['cover'];
 			?>
 				<li class="flex flex-col bg-white rounded shadow-md hover:shadow ">
 					<div class="relative w-full">
 					<div class="relative w-full">
 						<div style="height: 300px; object-fit:cover; overflow:hidden;">
-							<img src="https://d13ezvd6yrslxm.cloudfront.net/wp/wp-content/images/2018-bestposters-spidermanspiderverse-700x1038.jpg" class="object-cover w-full h-100 rounded-t" alt="Plan" />
+							<img src="<?php echo ($product['cover']) ?"../product/$cover" : "https://d13ezvd6yrslxm.cloudfront.net/wp/wp-content/images/2018-bestposters-spidermanspiderverse-700x1038.jpg"; ?> " class="object-cover w-full h-full rounded-t" alt="Plan" />
 						</div>
 					</div>
 					</div>

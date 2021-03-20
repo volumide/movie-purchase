@@ -4,7 +4,7 @@
 	require_once './productsController.php';
 	require_once '../models/isadmin.php';
 
-	if (getSession($_SESSION['status']) !== 'not eligible'){
+	if (getSession($_SESSION['status']) !== 'eligible'){
 		header("Location: ../");
 		exit();
 	}
@@ -33,11 +33,12 @@
 				<a href="../filter/end-with-s.php" class="bg-blue-400 py-3 px-5 block rounded text-white font-semibold flex items-center justify-center text-3xl">Ends with "S"</a>
 		<?php
 		foreach ($allProduct as $product){
+			$cover = $product['cover'];
 			?>
 				<li class="flex flex-col bg-white rounded shadow-md hover:shadow ">
 					<div class="relative w-full">
 						<div style="height: 300px; object-fit:cover; overflow:hidden;">
-							<img src="https://d13ezvd6yrslxm.cloudfront.net/wp/wp-content/images/2018-bestposters-spidermanspiderverse-700x1038.jpg" class="object-cover w-full h-100 rounded-t" alt="Plan" />
+							<img src="<?php echo ($product['cover']) ?"$cover" : "https://d13ezvd6yrslxm.cloudfront.net/wp/wp-content/images/2018-bestposters-spidermanspiderverse-700x1038.jpg"; ?> " class="object-cover h-full w-full h-100 rounded-t" alt="<?php echo $cover ?>"
 						</div>
 					</div>
 					<div class="p-6">
